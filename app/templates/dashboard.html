@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://beedevservices.github.io/beedev-css/framework/beedev.css'>
+    <title>{{user.firstName}}'s Dashboard</title>
+</head>
+<body>
+    <header>
+        <h1>Web Store</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/store">Store</a>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to the store, {{user.firstName}}</h1>
+        <form action="/product/createProd" method='post'>
+            <section>
+                <label for="pName">Product Name: </label>
+                <input type="text" name='pName'>
+            </section>
+            <section>
+                <label for="pDesc">Product Description: </label>
+                <textarea name="pDesc" cols="30" rows="10"></textarea>
+            </section>
+            <section>
+                <label for="pPrice">Product Price: </label>
+                <input type="text" name='pPrice'>
+            </section>
+            <section style='display: none;'>
+                <label for="users_id">Seller: </label>
+                <input type="text" name='users_id' value='{{user.id}}'>
+            </section>
+            <button>Add Item</button>
+        </form>
+        <div class="row">
+            {% for i in items %}
+                <div class="column">
+                    <h2>{{i.pName}}</h2>
+                    <h3>{{i.pPrice}}</h3>
+                    <p>{{i.pDesc}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
