@@ -13,7 +13,7 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
-    return render_template('dashboard.html', user=User.getOne(data), items=Product.getAll())
+    return render_template('dashboard.html', user=User.getOne(data), items=Product.getAll(), getItems=Product.getItemsUsername())
 
 @app.route('/product/createProd', methods=['POST'])
 def createProd():

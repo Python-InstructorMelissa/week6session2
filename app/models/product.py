@@ -24,4 +24,22 @@ class Product:
         products = []
         for product in results:
             products.append(cls(product))
+        # print("all prods: ", products)
         return products
+
+    @classmethod
+    def getItemsUsername(cls):
+        query = "SELECT * FROM products LEFT JOIN users on products.users_id = users.id;"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        # print("getitemsUserresults: ", results)
+        products = []
+        for row in results:
+            item = {
+                'pName': row['pName'],
+                'pDesc': row['pDesc'],
+                'pPrice': row['pPrice'],
+                'pUsername': row['username']
+            }
+            products.append(item)
+        # print("products list: ", products)
+        return products    

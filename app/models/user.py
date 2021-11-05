@@ -2,6 +2,7 @@ from app.config.mysqlconnection import connectToMySQL
 from flask import flash
 import re
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+from app.models.product import Product
 
 
 class User:
@@ -14,6 +15,7 @@ class User:
         self.password = data['password']
         self.createAt = data['createAt']
         self.updatedAt = data['updatedAt']
+        self.prods = []
 
     @staticmethod
     def validate(user):
@@ -75,3 +77,4 @@ class User:
     def delete(cls, data):
         query = "DELETE FROM users WHERE id = %(id)s;"
         return connectToMySQL(cls.db_name).query_db(query, data)
+

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://beedevservices.github.io/beedev-css/framework/beedev.css'>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>{{user.firstName}}'s Dashboard</title>
 </head>
 <body>
@@ -39,11 +40,12 @@
             <button>Add Item</button>
         </form>
         <div class="row">
-            {% for i in items %}
+            {% for i in getItems %}
                 <div class="column">
                     <h2>{{i.pName}}</h2>
                     <h3>{{i.pPrice}}</h3>
                     <p>{{i.pDesc}}</p>
+                    <p>{{i.pUsername}}</p>
                 </div>
             {% endfor %}
         </div>
