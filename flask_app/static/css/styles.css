@@ -1,0 +1,51 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+body header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1em;
+}
+body header nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 95%;
+}
+body main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+body main .formDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 1em;
+}
+body main .formDiv form {
+  margin: 1em;
+  border: 3px groove blue;
+  padding: 1em;
+}
+body main table,
+body main td,
+body main th {
+  border: 2px double black;
+}
+body main table {
+  width: 85%;
+}
+body main img {
+  max-width: 300px;
+}

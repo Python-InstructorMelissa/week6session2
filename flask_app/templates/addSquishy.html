@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="formDiv">
+            <form action="/createSquishy/" method='post'>
+                <section>
+                    <label for="name">Name: </label>
+                    <input type="text" name="name">
+                </section>
+                <section>
+                    <label for="color">Color: </label>
+                    <input type="text" name="color">
+                </section>
+                <section>
+                    <label for="img">Link to Image: </label>
+                    <input type="text" name="img">
+                </section>
+                <section>
+                    <input type="hidden" name="user_id" value='{{user.id}}'>
+                </section>
+                <button>Add</button>
+            </form>
+
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
