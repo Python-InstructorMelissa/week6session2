@@ -56,7 +56,8 @@ class User:
     def usersSquishy(cls, data):
         q = 'SELECT * FROM user LEFT JOIN squishy on squishy.user_id = user.id WHERE user.id = %(id)s;'
         r = connectToMySQL(cls.db).query_db(q, data)
-        user = cls(r[0])
+        print("results: ", r)
+        list = cls(r[0])
         for row in r:
             data = {
                 'id': row['squishy.id'],
@@ -66,5 +67,7 @@ class User:
                 'user_id': row['user_id']
             }
             s = squishy.Squishy(data)
-            user.squishies.append(s)
-        return user
+            print("s: ", s)
+            list.squishies.append(s)
+        print('list: ', list)
+        return list

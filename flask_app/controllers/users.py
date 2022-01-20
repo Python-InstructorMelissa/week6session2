@@ -51,8 +51,8 @@ def logout():
     flash("You have been logged out")
     return redirect('/')
 
-@app.route('/user/<int:id>/view/')
-def viewUserSquishy(id):
+@app.route('/user/<int:user_id>/view/')
+def viewUserSquishy(user_id):
     if 'user_id' not in session:
         flash('Please log in')
         return redirect('/')
@@ -61,8 +61,9 @@ def viewUserSquishy(id):
             'id': session['user_id']
         }
         data1 = {
-            'id': id
+            'id': user_id
         }
         user = User.getOne(data)
-        mySquish = User.usersSquishy(data1)
-        return render_template('viewUserSquishy.html', user=user, mySquish=mySquish)
+        mine = User.usersSquishy(data1)
+        print("all squishies: ", mine)
+        return render_template('viewUserSquishy.html', user=user, mine=mine)

@@ -28,9 +28,11 @@
                 <th>Color</th>
                 <th>Img</th>
             </tr>
-            {% for mine in mySquish %}
+            {% for m in mine.squishies %}
                 <tr>
-                    <td>{{mine.name}}</td>
+                    <td>{{m.name}}</td>
+                    <td>{{m.color}}</td>
+                    <td><img src="{{m.img}}" alt="{{m.name}}"></td>
                 </tr>
             {% endfor %}
         </table>
