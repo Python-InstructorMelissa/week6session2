@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>AirCorp</title>
+</head>
+<body>
+    <header>
+        <h1>Add an AirCorp Airline</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <form action="/airlines/create/" method='post'>
+            <section>
+                <label for="name">Airline Name:</label>
+                <input type="text" name="name">
+            </section>
+            <section>
+                <label for="headquarters">Headquarter Location:</label>
+                <input type="text" name="headquarters">
+            </section>
+            <section>
+                <label for="locations">Number of Locations: </label>
+                <input type="number" name="locations">
+            </section>
+            <section>
+                <label for="workers">Number of Workers: </label>
+                <input type="number" name="workers">
+            </section>
+            <section>
+                <label for="planes">Number of planes: </label>
+                <input type="number" name="planes">
+            </section>
+            <button>Add Airline</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

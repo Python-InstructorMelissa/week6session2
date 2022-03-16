@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>AirCorp</title>
+</head>
+<body>
+    <header>
+        <h1>All AirCorp Flights</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Flight Number</th>
+                <th>Departing City</th>
+                <th>Arriving City</th>
+                <th>Airline</th>
+                <th>Actions</th>
+            </tr>
+            {% for flight in flights %}
+                <tr>
+                    <td>{{flight.id}}</td>
+                    <td>{{flight.number}}</td>
+                    <td>{{flight.departing}}</td>
+                    <td>{{flight.arriving}}</td>
+                    <td>
+                        {% for airline in airlines %}
+                            {% if flight.airline_id == airline.id %}
+                                {{airline.name}}
+                            {% endif %}    
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="/flights/{{flight.id}}/view/">View</a> | 
+                        <a href="/flights/{{flight.id}}/edit/">Edit</a> | 
+                        <a href="/flights/{{flight.id}}/delete/">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button><a href="/flights/add/">Add new Flight</a></button>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    {% block menu %}
+    <a href="/airlines/">Airlines</a>
+    <a href="/flights/">Flights</a>
+    {% if session['user_id'] %}
+        <button><a href="/logout/">Logout</a></button>
+    {% endif %}
+    {% endblock menu %}
+</body>
+</html>

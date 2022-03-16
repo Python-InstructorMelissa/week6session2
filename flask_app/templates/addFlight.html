@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>AirCorp</title>
+</head>
+<body>
+    <header>
+        <h1>Add an AirCorp Flight</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <form action="/flights/create/" method='post'>
+            <section>
+                <label for="number">Flight Number:</label>
+                <input type="number" name="number">
+            </section>
+            <section>
+                <label for="departing">Departing City:</label>
+                <input type="text" name="departing">
+            </section>
+            <section>
+                <label for="arriving">Arriving City: </label>
+                <input type="text" name="arriving">
+            </section>
+            <section>
+                <label for="airline_id">Select Airline:</label>
+                <select name="airline_id">
+                    {% for airline in airlines %}
+                        <option value="{{airline.id}}">{{airline.name}}</option>
+                    {% endfor %}
+                </select>
+            </section>
+            <button>Add Flight</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

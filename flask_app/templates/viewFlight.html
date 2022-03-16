@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Flight #{{flight.number}}</title>
+</head>
+<body>
+    <header>
+        {% for airline in airlines %}
+            {% if flight.airline_id == airline.id %}
+                <h1>{{airline.name}} Flight #{{flight.number}}</h1>
+            {% endif %}
+        {% endfor %}
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <h2>Flight #: {{flight.number}}</h2>
+        <h3>Starting City: {{flight.departing}}</h3>
+        <h3>Destination City: {{flight.arriving}}</h3>
+        {% for airline in airlines %}
+            {% if flight.airline_id == airline.id %}
+                <h3>Airline: {{airline.name}}</h3>
+            {% endif %}
+        {% endfor %}
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
