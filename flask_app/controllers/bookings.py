@@ -9,7 +9,7 @@ from flask_app.models.flight import Flight
 @app.route('/flights/<int:flight_id>/book/')
 def bookFlight(flight_id):
     data = {
-        'id': id,
+        'id': session['user_id'],
     }
     flightData = {
         'id': flight_id
@@ -20,12 +20,12 @@ def bookFlight(flight_id):
 def saveBooking():
     data = {
         'firstName': request.form['firstName'],
-        'lastName': request.form['lastName'],
+        'lastaName': request.form['lastaName'],
         'passengers': request.form['passengers'],
         'adultPassengers': request.form['adultPassengers'],
         'flightDate': request.form['flightDate'],
         'bagCheck': request.form['bagCheck'],
-        'user_id': request.form['user_id'],
+        'user_id': session['user_id'],
         'flight_id': request.form['flight_id'],
     }
     Booking.save(data)

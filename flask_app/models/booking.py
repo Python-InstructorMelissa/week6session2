@@ -7,7 +7,7 @@ class Booking:
     def __init__(self, data):
         self.id = data['id']
         self.firstName = data['firstName']
-        self.lastName = data['lastName']
+        self.lastaName = data['lastaName']
         self.passengers = data['passengers']
         self.adultPassengers = data['adultPassengers']
         self.flightDate = data['flightDate']
@@ -36,12 +36,12 @@ class Booking:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO booking (firstName, lastName, passengers, adultPassengers, flightDate, bagCheck, user_id, flight_id) VALUES (%(firstName)s, %(lastName)s, %(passengers)s, %(adultPassengers)s, %(flightDate)s, %(bagCheck)s, %(user_id)s, %(flight_id)s);'
+        query = 'INSERT INTO booking (firstName, lastaName, passengers, adultPassengers, flightDate, bagCheck, user_id, flight_id) VALUES (%(firstName)s, %(lastaName)s, %(passengers)s, %(adultPassengers)s, %(flightDate)s, %(bagCheck)s, %(user_id)s, %(flight_id)s);'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod
     def update(cls, data):
-        query = 'UPDATE booking SET firstName=%(firstName)s, lastName=%(lastName)s, passengers=%(passengers)s, adultPassengers=%(adultPassengers)s, flightDate=%(flightDate)s, bagCheck=%(bagCheck)s WHERE id = %(id)s;'
+        query = 'UPDATE booking SET firstName=%(firstName)s, lastaName=%(lastaName)s, passengers=%(passengers)s, adultPassengers=%(adultPassengers)s, flightDate=%(flightDate)s, bagCheck=%(bagCheck)s WHERE id = %(id)s;'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod

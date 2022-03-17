@@ -2,6 +2,9 @@ from flask_app import app
 from flask import Flask, render_template, redirect, session, request, flash
 from flask_bcrypt import Bcrypt
 from flask_app.models.user import User
+from flask_app.models.airline import Airline
+from flask_app.models.flight import Flight
+from flask_app.models.booking import Booking
 
 bcrypt = Bcrypt(app)
 
@@ -26,7 +29,7 @@ def register():
         return redirect('/')
     session['user_id'] = id
     flash("You are now logged in")
-    return redirect('/airlines/')
+    return redirect('/dashboard/')
 
 @app.route('/login/', methods=['POST'])
 def login():
@@ -42,7 +45,7 @@ def login():
         return redirect('/')
     session['user_id'] = user.id
     flash("You are now logged in")
-    return redirect('/airlines/')
+    return redirect('/dashboard/')
 
 @app.route('/logout/')
 def logout():
@@ -57,4 +60,40 @@ def dashboard():
     data = {
         'id': session['user_id']
     }
-    return render_template('dashboard.html', user=user.User.getOne(data))
+    # Creating code to make certain users an employee upon reaching this page
+    theUser = User.getOne(data)
+    if theUser.id == 1:
+        if theUser.access == 9:
+            return redirect('/airlines/')
+        else:
+            User.updateEmployee(data)
+            flash('User access updated to Employee level 9')
+            return redirect('/airlines/')
+    else:
+        bookings = User.userBookings(data)
+        print("************ all booking from controller: ", bookings)
+        return render_template('dashboard.html', user=User.getOne(data), bookings = User.userBookings(data))
+
+@app.route('/users/')
+def users():
+    if 'user_id' not in session:
+        flash("You must be logged in to view this page")
+        return redirect('/')
+    data = {
+        'id': session['user_id']
+    }
+    user = User.getOne(data)
+    if user.access == 9:
+        return render_template('users.html', user=User.getOne(data), allUsers=User.getAll())
+    else:
+        flash('You are not authorized to view this page')
+        return redirect('/dashboard/')
+
+@app.route('/users/<int:user_id>/createEmployee/')
+def createEmployee(user_id):
+    data = {
+        'id': user_id
+    }
+    User.updateEmployee(data)
+    flash('User updated to employee')
+    return redirect('/users/')

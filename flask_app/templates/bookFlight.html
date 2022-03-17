@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{{user.fullName()}}</title>
+</head>
+<body>
+    <header>
+        <h1>Please fill out the flight information {{user.fullName()}}</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <div class="messages">
+        {% with messages = get_flashed_messages() %}
+            {%if messages %}
+                {% for m in messages %}
+                    <h5>{{m}}</h5>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <main>
+        <form action="/saveBooking/" method="post">
+            <section>
+                <label for="firstName">Main Passenger First Name</label>
+                <input type="text" name="firstName">
+            </section>
+            <section>
+                <label for="lastaName">Main Passenger Last Name</label>
+                <input type="text" name="lastaName">
+            </section>
+            <section>
+                <label for="passengers">Number of Passengers</label>
+                <input type="number" name="passengers">
+            </section>
+            <section>
+                <label for="adultPassengers">Number of Adult Passengers</label>
+                <input type="number" name="adultPassengers">
+            </section>
+            <section>
+                <label for="flightDate">Date for Flight</label>
+                <input type="date" name="flightDate">
+            </section>
+            <section>
+                <span>Are you checking bags?</span>
+                <label for="bagCheck">Yes</label>
+                <input type="radio" name="bagCheck" value="1">
+                <label for="bagCheck">No</label>
+                <input type="radio" name="bagCheck" value="0">
+            </section>
+            <section>
+                <input type="hidden" name="flight_id" value="{{flight.id}}">
+            </section>
+            <button>Book Flight</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

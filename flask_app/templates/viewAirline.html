@@ -19,14 +19,23 @@
             <div class="column">
                 <h2>Headquartered in: {{airline.headquarters}}</h2>
                 <h2>Number of Locations: {{airline.locations}}</h2>
-                <h3>Number of Workers: {{airline.workers}}</h3>
-                <h3>Number of Planes: {{airline.planes}}</h3>
+                {% if user.access == 9 %}
+                    <h3>Number of Workers: {{airline.workers}}</h3>
+                    <h3>Number of Planes: {{airline.planes}}</h3>
+                {% endif %}
             </div>
             <div class="column flights">
                 <h3>Flights:</h3>
                 <ul>
                     {% for flight in flights.flights %}
-                        <li><h4>Flight #{{flight.number}} from {{flight.departing}} to {{flight.arriving}}</h4></li>
+                        <li>
+                            <h4>Flight #{{flight.number}} from {{flight.departing}} to {{flight.arriving}}</h4>
+                            {% if user.access == 0 %}
+                                <ul>
+                                    <li><a href="/flights/{{flight.id}}/book/">Book a Flight</a></li>
+                                </ul>
+                            {% endif %}
+                        </li>
                     {% endfor %}
                 </ul>
             </div>
