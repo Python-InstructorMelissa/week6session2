@@ -32,15 +32,14 @@
                 <th>Date of Flight</th>
                 <th>Actions</th>
             </tr>
-            {% for flights in bookings %}
-                {% for booking in flights %}
+            {% for booking in bookings %}
                 <tr>
-                    <td>{{booking.number}}</td>
-                    <td>{{booking.name}}</td>
-                    <td>{{booking.flightDate}}</td>
+                    <!-- Now we need to add the table name in here to pull the data -->
+                    <td>{{booking.flight.number}}</td>
+                    <td>{{booking.airline.name}}</td>
+                    <td>{{booking.booking.flightDate}}</td>
                     <td></td>
                 </tr>
-                {% endfor %}
             {% endfor %}
         </table>
     </main>

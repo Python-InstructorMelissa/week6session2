@@ -17,6 +17,9 @@ class User:
         self.access = data['access']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+        self.booking = None
+        self.flight = None
+        self.airline = None
         self.flights = []
     
     def fullName(self):
@@ -96,7 +99,6 @@ class User:
         results = connectToMySQL(cls.db).query_db(query, data)
         print('userBookings model results: ', results)
         user = cls(results[0])
-        oneFlight = []
         for row in results:
             bookingData = {
                 'id': row['booking.id'],
@@ -111,7 +113,9 @@ class User:
                 'user_id': row['user_id'],
                 'flight_id': row['flight_id'],
             }
-            oneFlight.append(bookingData)
+            oneBooking = booking.Booking(bookingData)
+            user.booking = oneBooking
+            # Created a field for each  for this it is booking and set to none
             flightData = {
                 'id': row['flight.id'],
                 'number': row['number'],
@@ -121,7 +125,8 @@ class User:
                 'updatedAt': row['flight.updatedAt'],
                 'airline_id': row['airline_id'],
             }
-            oneFlight.append(flightData)
+            oneFlight = flight.Flight(flightData)
+            user.flight = oneFlight
             airlineData = {
                 'id': row['airline.id'],
                 'name': row['name'],
@@ -132,8 +137,10 @@ class User:
                 'createdAt': row['airline.createdAt'],
                 'updatedAt': row['airline.updatedAt'],
             }
-            oneFlight.append(airlineData)
-            user.flights.append(oneFlight)
+            oneAirline = airline.Airline(airlineData)
+            user.airline = oneAirline
+            # here we are taking these new single use values that were none and appending them to the flights then since it is single use or just a string that keeps getting updated each loop it will have new data and thus append new info...
+            user.flights.append(user)
             print('each row of users flights userBooking Model: ', bookingData, flightData, airlineData)
         print("printing list after append in model: ", user.flights)
         return user.flights
