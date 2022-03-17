@@ -17,7 +17,6 @@
     <main>
         <table>
             <tr>
-                <th>ID</th>
                 <th>Flight Number</th>
                 <th>Departing City</th>
                 <th>Arriving City</th>
@@ -26,7 +25,6 @@
             </tr>
             {% for flight in flights %}
                 <tr>
-                    <td>{{flight.id}}</td>
                     <td>{{flight.number}}</td>
                     <td>{{flight.departing}}</td>
                     <td>{{flight.arriving}}</td>
@@ -38,9 +36,12 @@
                         {% endfor %}
                     </td>
                     <td>
-                        <a href="/flights/{{flight.id}}/view/">View</a> | 
+                        <a href="/flights/{{flight.id}}/view/">View</a>
+                        {% if user.access == 9 %}
+                        | 
                         <a href="/flights/{{flight.id}}/edit/">Edit</a> | 
                         <a href="/flights/{{flight.id}}/delete/">Delete</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

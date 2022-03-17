@@ -27,6 +27,9 @@
                 <h3>Airline: {{airline.name}}</h3>
             {% endif %}
         {% endfor %}
+        {% if user.access == 0 %}
+            <a href="/flights/{{flight.id}}/book/">Book this Flight</a>
+        {% endif %}
     </main>
     <footer>
 

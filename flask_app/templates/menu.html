@@ -5,11 +5,13 @@
     <a href="/airlines/">Airlines</a>
     <a href="/flights/">Flights</a>
     {% if session['user_id'] %}
-        <a href="/dashboard/">Dashboard</a>
+        {% if user.access == 0 %}
+            <a href="/dashboard/">Dashboard</a>
+        {% endif %}
         {% if user.access == 9 %}
             <a href="/users/">Users</a>
         {% endif %}
-        <button><a href="/logout/">Logout</a></button>
+        <a href="/logout/">Logout</a>
     {% endif %}
     {% endblock menu %}
 </body>
