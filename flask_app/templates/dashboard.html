@@ -37,7 +37,7 @@
                     <!-- Now we need to add the table name in here to pull the data -->
                     <td>{{booking.flight.number}}</td>
                     <td>{{booking.airline.name}}</td>
-                    <td>{{booking.booking.flightDate}}</td>
+                    <td>{{booking.booking.flightDate.strftime('%m/%d/%y')}}</td>
                     <td></td>
                 </tr>
             {% endfor %}
