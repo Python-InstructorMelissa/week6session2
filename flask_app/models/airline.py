@@ -13,6 +13,7 @@ class Airline:
         self.planes = data['planes']
         self.createdAt = data['createdAt']
         self.updatedAt = data['updatedAt']
+        self.user_id = data['user_id']
         self.flights = []
 
 
@@ -35,7 +36,7 @@ class Airline:
 
     @classmethod
     def save(cls, data):
-        query = 'INSERT INTO airline (name, headquarters, locations, workers, planes) VALUES (%(name)s, %(headquarters)s, %(locations)s, %(workers)s, %(planes)s);'
+        query = 'INSERT INTO airline (name, headquarters, locations, workers, planes, user_id) VALUES (%(name)s, %(headquarters)s, %(locations)s, %(workers)s, %(planes)s, %(user_id)s);'
         return connectToMySQL(cls.db).query_db(query, data)
 
     @classmethod

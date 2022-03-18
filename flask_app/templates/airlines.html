@@ -38,10 +38,10 @@
                     <td>{{airline.locations}}</td>
                     <td>
                         <a href="/airlines/{{airline.id}}/view/">View</a>
-                        {% if user.access == 9 %}
+                        {% if user.id == airline.user_id %}
                         | <a href="/airlines/{{airline.id}}/edit/">Edit</a> | 
                         <a href="/airlines/{{airline.id}}/delete/">Delete</a>
-                    {% endif %}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}

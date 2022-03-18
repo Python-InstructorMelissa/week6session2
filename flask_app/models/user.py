@@ -136,6 +136,7 @@ class User:
                 'planes': row['planes'],
                 'createdAt': row['airline.createdAt'],
                 'updatedAt': row['airline.updatedAt'],
+                'user_id': row['airline.user_id'],
             }
             oneAirline = airline.Airline(airlineData)
             user.airline = oneAirline

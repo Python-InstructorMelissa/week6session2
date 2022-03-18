@@ -11,7 +11,7 @@ def airlines():
     data = {
         'id': session['user_id']
     }
-    return render_template('airlines.html', airlines = Airline.getAll(), user=user.User.getOne(data))
+    return render_template('airlines.html', airlines = Airline.getAll(), user=user.User.getOne(data), users=user.User.getAll())
 
 @app.route('/airlines/add/')
 def addAirline():
@@ -31,6 +31,7 @@ def createAirline():
         'locations': request.form['locations'],
         'workers': request.form['workers'],
         'planes': request.form['planes'],
+        'user_id': request.form['user_id'],
     }
     Airline.save(data)
     return redirect('/airlines/')
