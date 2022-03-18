@@ -69,6 +69,8 @@ def dashboard():
             User.updateEmployee(data)
             flash('User access updated to Employee level 9')
             return redirect('/airlines/')
+    if theUser.access == 9:
+        return redirect('/airlines/')
     else:
         bookings = User.userBookings(data)
         print("************ all booking from controller: ", bookings)
