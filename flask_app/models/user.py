@@ -20,7 +20,6 @@ class User:
         self.booking = None
         self.flight = None
         self.airline = None
-        self.flights = []
     
     def fullName(self):
         return f'{self.firstName} {self.lastName}'
@@ -97,9 +96,11 @@ class User:
     def userBookings(cls, data):
         query = 'SELECT * FROM user Left JOIN booking ON user.id = booking.user_id LEFT JOIN flight ON booking.flight_id = flight.id LEFT JOIN airline ON flight.airline_id = airline.id WHERE user.id = %(id)s;'
         results = connectToMySQL(cls.db).query_db(query, data)
-        print('userBookings model results: ', results)
-        user = cls(results[0])
+        # print('userBookings model results: ', results)
+        # user = cls(results[0])
+        allFlights = []
         for row in results:
+            user = cls(row)
             bookingData = {
                 'id': row['booking.id'],
                 'firstName': row['booking.firstName'],
@@ -114,7 +115,9 @@ class User:
                 'flight_id': row['flight_id'],
             }
             oneBooking = booking.Booking(bookingData)
+            print('1111 oneBooking: ', oneBooking)
             user.booking = oneBooking
+            print('2222 user.booking: ', user.booking)
             # Created a field for each  for this it is booking and set to none
             flightData = {
                 'id': row['flight.id'],
@@ -126,7 +129,9 @@ class User:
                 'airline_id': row['airline_id'],
             }
             oneFlight = flight.Flight(flightData)
+            print('3333 oneFlight: ', oneFlight)
             user.flight = oneFlight
+            print('4444 user.flight: ', user.flight)
             airlineData = {
                 'id': row['airline.id'],
                 'name': row['name'],
@@ -139,9 +144,12 @@ class User:
                 'user_id': row['airline.user_id'],
             }
             oneAirline = airline.Airline(airlineData)
+            print('5555 oneAirline: ', oneAirline)
             user.airline = oneAirline
+            print('6666 user.airline: ', user.airline)
+            print('7777 user before append: ', user)
             # here we are taking these new single use values that were none and appending them to the flights then since it is single use or just a string that keeps getting updated each loop it will have new data and thus append new info...
-            user.flights.append(user)
-            print('each row of users flights userBooking Model: ', bookingData, flightData, airlineData)
-        print("printing list after append in model: ", user.flights)
-        return user.flights
+            allFlights.append(user)
+            print('8888 after append: ', allFlights)
+        # print("printing list after append in model: ", user.flights)
+        return allFlights
