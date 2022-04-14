@@ -115,7 +115,7 @@ class User:
                 'flight_id': row['flight_id'],
             }
             oneBooking = booking.Booking(bookingData)
-            print('1111 oneBooking: ', oneBooking)
+            print('1111 oneBooking: ', oneBooking, "user", user, "bookingData", bookingData)
             user.booking = oneBooking
             print('2222 user.booking: ', user.booking)
             # Created a field for each  for this it is booking and set to none
