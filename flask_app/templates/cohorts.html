@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>Cohorts Main Page</title>
+</head>
+<body>
+    <header>
+        <h1>All Cohorts</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Instructor</th>
+                <th>Subject</th>
+                <th>Actions</th>
+            </tr>
+            {% for cohort in cohorts %}
+                <tr>
+                    <td>{{cohort.name}}</td>
+                    <td>{{cohort.instructor}}</td>
+                    <td>
+                        {% for subject in subjects %}
+                            {% if cohort.subject_id == subject.id %}
+                                {{subject.name}}
+                            {% endif %} 
+                        {% endfor %}
+                    </td>
+                    <td><a href="/cohorts/{{cohort.id}}/view/">View</a> | <a href="/cohorts/{{cohort.id}}/edit/">Edit</a> | <a href="/cohorts/{{cohort.id}}/delete/">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button><a href="/cohorts/new/">Add Cohort</a></button>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

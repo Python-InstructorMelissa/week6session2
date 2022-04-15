@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{{subject.name}}</title>
+</head>
+<body>
+    <header>
+        <h1>About {{subject.name}}</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <div class="row">
+            <div class="column">
+                <h2>Name: {{subject.name}}</h2>
+                <textarea cols="30" rows="10" disabled>{{subject.description}}</textarea>
+            </div>
+            <table>
+                <tr>
+                    <th>Class Name</th>
+                    <th>Actions</th>
+                </tr>
+                {% for cohort in cohorts %}
+                    <tr>
+                        <td>{{cohort.name}}</td>
+                        <td><a href="/cohorts/{{cohort.id}}/view/">View Cohort</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <title>{{cohort.name}}</title>
+</head>
+<body>
+    <header>
+        <h1>Edit {{cohort.name}}</h1>
+        <nav>
+            {% block menu %} {% include 'menu.html' %} {% endblock menu %}
+        </nav>
+    </header>
+    <main>
+        <form action="/cohorts/{{cohort.id}}/update/" method='post'>
+            <section>
+                <label for="name">Course Name:</label>
+                <input type="text" name="name" value='{{cohort.name}}'>
+            </section>
+            <section>
+                <label for="instructor">Instructor:</label>
+                <input type="text" name="instructor" value='{{cohort.instructor}}'>
+            </section>
+            <section>
+                <label for="cohortLength">Length of Course:</label>
+                <input type="text" name="cohortLength" value='{{cohort.cohortLength}}'>
+            </section>
+            <section>
+                <label for="subject_id">Chose the course subject</label>
+                <select name="subject_id">
+                    {% for subject in subjects %}
+                        <option value="{{subject.id}}">{{subject.name}}</option>
+                    {% endfor %}
+                </select>
+            </section>
+            <button>Update Course</button>
+        </form>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/scripts.js')}}"></script>
+</body>
+</html>
